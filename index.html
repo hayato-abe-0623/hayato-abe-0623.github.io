@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hayatoのポートフォリオ。検査・評価業務での経験と、プログラミングの学習・制作について紹介します。">
+  <meta name="color-scheme" content="light">
+  <title>Hayato | Portfolio</title>
+  <style>
+    /* 色と余白を変える場合は、まずこの変数を編集してください。 */
+    :root { --paper:#f7f6f2; --ink:#192b33; --muted:#53656b; --accent:#176353; --line:#d3dcd7; --white:#fff; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:24px; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif; line-height:1.85; }
+    a { color:var(--accent); text-underline-offset:5px; }
+    a:focus-visible { outline:3px solid var(--accent); outline-offset:6px; }
+    .wrap { width:min(1080px,calc(100% - 48px)); margin-inline:auto; }
+    .skip { position:absolute; top:-100px; left:16px; padding:12px; background:white; z-index:2; }
+    .skip:focus { top:12px; }
+    header { border-bottom:1px solid var(--line); }
+    .header-inner { display:flex; align-items:center; justify-content:space-between; gap:20px; padding-block:23px; }
+    .brand { color:var(--ink); text-decoration:none; font-size:18px; font-weight:800; letter-spacing:.08em; }
+    nav { display:flex; flex-wrap:wrap; gap:12px 24px; font-size:13px; }
+    nav a { color:var(--muted); text-decoration:none; }
+    nav a:hover { text-decoration:underline; }
+    .hero { padding-block:86px 72px; display:grid; grid-template-columns:1.65fr 1fr; gap:56px; align-items:center; }
+    .eyebrow { color:var(--accent); font-size:12px; font-weight:700; letter-spacing:.18em; margin:0 0 18px; }
+    h1 { font-size:clamp(34px,5.2vw,58px); line-height:1.45; letter-spacing:-.035em; margin:0 0 24px; }
+    .intro { max-width:580px; color:var(--muted); font-size:16px; }
+    .button { display:inline-block; padding:10px 22px; background:var(--accent); color:white; text-decoration:none; border-radius:4px; margin-top:16px; font-size:14px; font-weight:700; }
+    .profile { border-top:4px solid var(--accent); background:#edf1eb; padding:30px; }
+    .profile-name { font-size:32px; margin:0 0 6px; letter-spacing:.04em; }
+    .profile dl { margin:24px 0 0; }
+    .profile dt { font-size:11px; color:var(--muted); letter-spacing:.12em; margin-top:18px; }
+    .profile dd { margin:3px 0 0; font-size:14px; }
+    section.content { border-top:1px solid var(--line); padding-block:48px; }
+    .section-heading { display:flex; gap:18px; align-items:baseline; margin-bottom:25px; }
+    .number { font-size:12px; color:var(--accent); font-family:monospace; }
+    h2 { margin:0; font-size:25px; }
+    h3 { margin:0 0 12px; font-size:18px; }
+    p { margin:0 0 16px; }
+    .columns { display:grid; grid-template-columns:1fr 1fr; gap:36px; }
+    .note { font-size:13px; color:var(--muted); }
+    .tags { display:flex; flex-wrap:wrap; gap:8px; padding:0; list-style:none; }
+    .tags li { border:1px solid var(--line); padding:4px 12px; border-radius:3px; font-size:13px; background:var(--white); }
+    .experience { display:grid; grid-template-columns:210px 1fr; gap:30px; padding:24px 0; border-bottom:1px solid var(--line); }
+    .experience:last-child { border-bottom:0; padding-bottom:0; }
+    .experience p { margin:0; }
+    .work { background:var(--white); border:1px solid var(--line); display:grid; grid-template-columns:130px 1fr; gap:30px; padding:30px; }
+    .work-mark { display:flex; align-items:center; justify-content:center; min-height:130px; background:var(--ink); color:#b8d9c8; font:40px monospace; }
+    .work-meta { font-size:12px; color:var(--accent); font-weight:700; margin-bottom:8px; }
+    .work ul { padding-left:20px; font-size:14px; }
+    footer { padding:26px 0; border-top:1px solid var(--line); color:var(--muted); font-size:12px; }
+    footer .wrap { display:flex; justify-content:space-between; gap:20px; }
+    @media(max-width:700px) {
+      .wrap { width:calc(100% - 36px); }
+      .header-inner { align-items:flex-start; flex-direction:column; gap:12px; }
+      nav { gap:10px 20px; }
+      .hero { grid-template-columns:1fr; padding-block:44px; gap:28px; }
+      .columns { grid-template-columns:1fr; gap:20px; }
+      .experience { grid-template-columns:1fr; gap:6px; }
+      .work { grid-template-columns:1fr; padding:22px; gap:20px; }
+      .work-mark { min-height:100px; }
+      section.content { padding-block:34px; }
+    }
+    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+    @media print {
+      body { background:white; font-size:11pt; }
+      .wrap { width:100%; }
+      nav,.button,.skip { display:none; }
+      .hero { padding-block:24px; }
+      section.content { padding-block:20px; }
+      .experience,.work,.profile { break-inside:avoid; }
+    }
+    .work > div { min-width:0; }
+    .project-docs { margin-top:28px; }
+    .project-docs section { padding:28px 0; border-top:1px solid var(--line); }
+    .project-docs h4 { font-size:17px; margin:28px 0 12px; }
+    .project-docs p { overflow-wrap:anywhere; }
+    pre { padding:18px; border:1px solid var(--line); border-radius:4px; background:#edf1eb; white-space:pre-wrap; overflow-wrap:anywhere; font-size:13px; line-height:1.75; }
+    pre.source { max-height:480px; overflow:auto; white-space:pre; overflow-wrap:normal; background:#192b33; color:#edf1eb; }
+    code { font-family:ui-monospace,SFMono-Regular,Consolas,monospace; }
+    @media print { pre.source { max-height:none; white-space:pre-wrap; overflow-wrap:anywhere; } }
+  </style>
+</head>
+<body id="top">
+  <!-- 公開用の呼び名です。氏名・住所・電話番号・生年月日などは必要な範囲だけ公開してください。 -->
+  <a class="skip" href="#main">本文へスキップ</a>
+  <header>
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="Hayato ポートフォリオの先頭へ">HAYATO<span aria-hidden="true">.</span></a>
+      <nav aria-label="メインナビゲーション">
+        <a href="#about">自己紹介</a><a href="#skills">スキル</a><a href="#experience">経験</a><a href="#works">制作物</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="wrap">
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <p class="eyebrow">HAYATO / PORTFOLIO</p>
+        <h1 id="hero-title">検査・評価の経験を、<br>次のものづくりへ。</h1>
+        <p class="intro">これまでの検査・評価業務やプログラミングの経験を土台に、Pythonの基礎を学習しています。データを整理し、業務の課題を解決できるエンジニアを目指しています。</p>
+        <a class="button" href="#works">制作物を見る <span aria-hidden="true">↗</span></a>
+      </div>
+      <aside class="profile" aria-label="プロフィール概要">
+        <p class="eyebrow">PROFILE</p><p class="profile-name">Hayato</p>
+        <p class="note">エンジニア志望 / 学習と制作の記録</p>
+        <dl><dt>BACKGROUND</dt><dd>検査・評価 / Excel・VBA</dd><dt>LEARNING</dt><dd>Python / データ分析の基礎</dd><dt>WORK STYLE</dt><dd>フルリモート勤務を希望</dd></dl>
+      </aside>
+    </section>
+    <section class="content" id="about" aria-labelledby="about-title">
+      <div class="section-heading"><span class="number">01</span><h2 id="about-title">自己紹介</h2></div>
+      <div class="columns"><p>検査プログラムに関わる業務や、テスト・評価業務を経験してきました。Excel・VBAを使ったデータの整理・分析の経験を、今後のIT業務に生かしたいと考えています。</p><p>現在はPythonを基礎から学び直しています。小さな課題を一つずつ解きながら、コードの動作と結果を自分の言葉で説明できることを大切にしています。</p></div>
+    </section>
+    <section class="content" id="skills" aria-labelledby="skills-title">
+      <div class="section-heading"><span class="number">02</span><h2 id="skills-title">経験のある技術と、学習中の技術</h2></div>
+      <div class="columns">
+        <div><h3>これまでに使用した技術</h3><ul class="tags" aria-label="使用経験"><li>Excel / VBA</li><li>C</li><li>Fortran 77</li></ul><p class="note">VBAは業務で、C・Fortran 77は学生時代に使用。過去の経験を含むため、現在の習熟度とは区別しています。</p></div>
+        <div><h3>現在の学習テーマ</h3><ul class="tags" aria-label="学習中"><li>Python 基礎</li><li>データ集計</li></ul><p class="note">合計・平均・最大値・最小値など、小さなデータを使った集計を練習しています。</p></div>
+      </div>
+    </section>
+    <section class="content" id="experience" aria-labelledby="experience-title">
+      <div class="section-heading"><span class="number">03</span><h2 id="experience-title">これまでの経験</h2></div>
+      <!-- 会社名・在籍期間・数値実績は、本人確認済みの内容だけを追加してください。順序は時系列ではありません。 -->
+      <div class="experience"><h3>検査プログラム関連</h3><p>画像検査プログラムに関わる業務を経験しました。</p></div>
+      <div class="experience"><h3>テスト・評価業務</h3><p>テストエンジニアとして、Excel・VBAを用いた信頼性評価や検査データの分析に取り組みました。</p></div>
+      <div class="experience"><h3>数値計算の学習</h3><p>学生時代にC・Fortran 77を使った数値計算を学びました。現在のPython学習でも、当時の考え方と比較しながら理解を深めています。</p></div>
+    </section>
+    <section class="content" id="works" aria-labelledby="works-title">
+      <div class="section-heading"><span class="number">04</span><h2 id="works-title">制作物</h2></div>
+      <article class="work">
+        <div class="work-mark" aria-hidden="true">Py ☀</div>
+        <div><p class="work-meta">01 / PYTHON · WEB API · LINE</p><h3>天気予報をLINEに送るBot</h3><p>指定した地域の天気予報をOpen-Meteoから取得し、LINEへ通知するPythonプログラムです。外出前に天気・気温・降水確率をまとめて確認できることを目的にしています。</p><ul><li>天気・最高／最低気温・日内最大の降水確率を日本語で整形</li><li>LINE Messaging APIによるプッシュ通知</li><li>環境変数による認証情報の管理と、通信エラーへの対応</li><li>送信しないプレビューと、通信不要の架空データデモ</li></ul><p><a href="#python-code">Pythonコードを見る</a> · <a href="#setup-guide">設定・実行手順を見る</a></p><p class="note">ローカルの自動テストで処理を検証済み。実APIとの接続・LINE実機受信・定期運用は未確認です。</p></div>
+      </article>
+
+      <div class="project-docs">
+        <section id="python-code" aria-labelledby="python-title">
+          <h3 id="python-title">Pythonコード</h3>
+          <p class="note">コード全文です。コピーして <code>weather_bot.py</code> という名前で保存できます。長いコードは枠の中をスクロールして読めます。</p>
+          <pre class="source" tabindex="0" aria-label="Pythonコード全文"><code>&quot;&quot;&quot;天気予報を整形し、明示的な --send 指定時だけLINEに送信する。&quot;&quot;&quot;
+import argparse
+import json
+import math
+import os
+import re
+import sys
+from urllib.error import HTTPError, URLError
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
+
+WEATHER = {
+    0: &#x27;快晴&#x27;, 1: &#x27;おおむね晴れ&#x27;, 2: &#x27;一部曇り&#x27;, 3: &#x27;曇り&#x27;,
+    45: &#x27;霧&#x27;, 48: &#x27;着氷性の霧&#x27;, 51: &#x27;弱い霧雨&#x27;, 53: &#x27;霧雨&#x27;, 55: &#x27;強い霧雨&#x27;,
+    56: &#x27;弱い着氷性の霧雨&#x27;, 57: &#x27;強い着氷性の霧雨&#x27;,
+    61: &#x27;弱い雨&#x27;, 63: &#x27;雨&#x27;, 65: &#x27;強い雨&#x27;, 66: &#x27;弱い着氷性の雨&#x27;, 67: &#x27;強い着氷性の雨&#x27;,
+    71: &#x27;弱い雪&#x27;, 73: &#x27;雪&#x27;, 75: &#x27;強い雪&#x27;, 77: &#x27;霧雪&#x27;,
+    80: &#x27;弱いにわか雨&#x27;, 81: &#x27;にわか雨&#x27;, 82: &#x27;激しいにわか雨&#x27;,
+    85: &#x27;弱いにわか雪&#x27;, 86: &#x27;強いにわか雪&#x27;, 95: &#x27;雷雨&#x27;,
+    96: &#x27;ひょうを伴う雷雨&#x27;, 99: &#x27;激しいひょうを伴う雷雨&#x27;,
+}
+
+
+def request_json(request, service):
+    &quot;&quot;&quot;HTTPエラーの本文や認証情報はログに出さない。自動再送はしない。&quot;&quot;&quot;
+    try:
+        with urlopen(request, timeout=20) as response:
+            return json.load(response)
+    except HTTPError as exc:
+        raise RuntimeError(f&#x27;{service}: HTTP {exc.code}。設定や利用上限を確認してください。&#x27;) from None
+    except (URLError, TimeoutError, OSError):
+        raise RuntimeError(f&#x27;{service}: 通信に失敗しました。送信時は到達状況を確認してから再実行してください。&#x27;) from None
+    except (ValueError, UnicodeError):
+        raise RuntimeError(f&#x27;{service}: 応答が正しいJSONではありません。&#x27;) from None
+
+
+def fetch_weather(latitude, longitude):
+    if not (math.isfinite(latitude) and -90 &lt;= latitude &lt;= 90
+            and math.isfinite(longitude) and -180 &lt;= longitude &lt;= 180):
+        raise ValueError(&#x27;緯度は-90〜90、経度は-180〜180で指定してください。&#x27;)
+    params = urlencode({
+        &#x27;latitude&#x27;: latitude, &#x27;longitude&#x27;: longitude,
+        &#x27;daily&#x27;: &#x27;weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&#x27;,
+        &#x27;timezone&#x27;: &#x27;Asia/Tokyo&#x27;, &#x27;forecast_days&#x27;: 1,
+        &#x27;temperature_unit&#x27;: &#x27;celsius&#x27;,
+    })
+    return request_json(Request(&#x27;https://api.open-meteo.com/v1/forecast?&#x27; + params), &#x27;天気API&#x27;)
+
+
+def format_message(data, city):
+    if not city.strip() or len(city) &gt; 80 or &#x27;\n&#x27; in city or &#x27;\r&#x27; in city:
+        raise ValueError(&#x27;地域名は1〜80文字の1行で指定してください。&#x27;)
+    try:
+        daily = data[&#x27;daily&#x27;]
+        date = daily[&#x27;time&#x27;][0]
+        code = daily[&#x27;weather_code&#x27;][0]
+        high = daily[&#x27;temperature_2m_max&#x27;][0]
+        low = daily[&#x27;temperature_2m_min&#x27;][0]
+        rain = daily[&#x27;precipitation_probability_max&#x27;][0]
+        if not isinstance(date, str) or not re.fullmatch(r&#x27;\d{4}-\d{2}-\d{2}&#x27;, date):
+            raise ValueError
+        if code is not None and (type(code) is not int):
+            raise ValueError
+        for value in (high, low, rain):
+            if value is not None and (type(value) not in (int, float) or not math.isfinite(value)):
+                raise ValueError
+        if rain is not None and not 0 &lt;= rain &lt;= 100:
+            raise ValueError
+    except (KeyError, IndexError, TypeError, ValueError):
+        raise ValueError(&#x27;天気データの形式が不正です。送信を中止しました。&#x27;) from None
+    def display(value, unit):
+        return &#x27;取得できませんでした&#x27; if value is None else f&#x27;{value:g}{unit}&#x27;
+    condition = WEATHER.get(code, &#x27;不明&#x27;)
+    return (f&#x27;{city}の天気予報（{date}・日本時間）\n&#x27;
+            f&#x27;天気：{condition}\n最高：{display(high, &quot;℃&quot;)} / 最低：{display(low, &quot;℃&quot;)}\n&#x27;
+            f&#x27;降水確率（日内最大）：{display(rain, &quot;%&quot;)}\n&#x27;
+            &#x27;出典：Open-Meteo（予報は変わる場合があります）\nhttps://open-meteo.com/&#x27;)
+
+
+def credentials():
+    token = os.environ.get(&#x27;LINE_CHANNEL_ACCESS_TOKEN&#x27;, &#x27;&#x27;).strip()
+    user_id = os.environ.get(&#x27;LINE_USER_ID&#x27;, &#x27;&#x27;).strip()
+    if not token or &#x27;\n&#x27; in token or &#x27;\r&#x27; in token:
+        raise ValueError(&#x27;LINE_CHANNEL_ACCESS_TOKENを環境変数に設定してください。&#x27;)
+    if not re.fullmatch(r&#x27;U[0-9a-fA-F]{32}&#x27;, user_id):
+        raise ValueError(&#x27;LINE_USER_IDに、Uから始まる33文字のユーザーIDを設定してください。&#x27;)
+    return token, user_id
+
+
+def send_line(text, token, user_id):
+    payload = {&#x27;to&#x27;: user_id, &#x27;messages&#x27;: [{&#x27;type&#x27;: &#x27;text&#x27;, &#x27;text&#x27;: text}]}
+    request = Request(&#x27;https://api.line.me/v2/bot/message/push&#x27;,
+                      data=json.dumps(payload, ensure_ascii=False).encode(&#x27;utf-8&#x27;),
+                      headers={&#x27;Authorization&#x27;: &#x27;Bearer &#x27; + token, &#x27;Content-Type&#x27;: &#x27;application/json&#x27;},
+                      method=&#x27;POST&#x27;)
+    request_json(request, &#x27;LINE API&#x27;)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(&#x27;--city&#x27;, default=&#x27;東京&#x27;, help=&#x27;表示する地域名。緯度・経度も合わせて変更してください。&#x27;)
+    parser.add_argument(&#x27;--latitude&#x27;, type=float, default=35.6812)
+    parser.add_argument(&#x27;--longitude&#x27;, type=float, default=139.7671)
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument(&#x27;--demo&#x27;, action=&#x27;store_true&#x27;, help=&#x27;架空データで確認。通信も送信もしません。&#x27;)
+    mode.add_argument(&#x27;--send&#x27;, action=&#x27;store_true&#x27;, help=&#x27;実際の予報を取得してLINEへ1回送信します。&#x27;)
+    args = parser.parse_args()
+    try:
+        auth = credentials() if args.send else None
+        if args.demo:
+            data = {&#x27;daily&#x27;: {&#x27;time&#x27;: [&#x27;2026-01-01&#x27;], &#x27;weather_code&#x27;: [2],
+                    &#x27;temperature_2m_max&#x27;: [12.5], &#x27;temperature_2m_min&#x27;: [4.0],
+                    &#x27;precipitation_probability_max&#x27;: [30]}}
+        else:
+            data = fetch_weather(args.latitude, args.longitude)
+        message = format_message(data, args.city)
+        if args.send:
+            send_line(message, *auth)
+            print(&#x27;LINE APIが送信要求を受け付けました。実際の受信はLINEで確認してください。&#x27;)
+        else:
+            print(&#x27;[架空データのデモ・未送信]&#x27; if args.demo else &#x27;[実際の予報・未送信]&#x27;)
+            print(message)
+        return 0
+    except (ValueError, RuntimeError) as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
+
+
+if __name__ == &#x27;__main__&#x27;:
+    raise SystemExit(main())
+</code></pre>
+        </section>
+        <section id="setup-guide" aria-labelledby="setup-title">
+          <h3 id="setup-title">設定・実行手順</h3>
+          <p class="note">Pythonを実行できるパソコンで操作してください。このページを開くだけではLINEへ送信されません。</p>
+          <p>コードをこのページからコピーした場合は、<code>weather-bot</code> フォルダを作成し、その中に <code>weather_bot.py</code> を保存してください。テスト用ファイルはコード一式のZIPに含まれています。</p>
+<p>天気予報を取得してLINEへ通知する、学習用のPython制作物です。</p>
+<p>コードの理解・修正・動作検証を進めるための初期版です。</p>
+<h4>構成</h4>
+<p>- <code>index.html</code>：制作物を紹介するポートフォリオ</p>
+<p>- <code>weather-bot/weather_bot.py</code>：予報取得・日本語整形・LINE送信</p>
+<p>- <code>weather-bot/test_weather_bot.py</code>：外部通信を使わない自動テスト</p>
+<p>- <code>.gitignore</code>：認証情報や一時ファイルの除外</p>
+<h4>できること</h4>
+<p>Open-Meteoの当日予報（日本時間）から天気・最高／最低気温・降水確率の日内最大値を取得し、LINE Messaging APIのpush APIで1ユーザーに送ります。</p>
+<p>地域名は表示用です。地域を変えるときは緯度・経度も必ず変更します。</p>
+<p>欠測は0とせず「取得できませんでした」と表示。不正な応答・通信エラーでは処理を止めます。</p>
+<p>Webhookを使う対話Botではなく、実行時に1回通知するプログラムです。</p>
+<h4>最初に試す（認証不要・外部通信なし）</h4>
+<p>Python 3.10以上を使用してください。追加ライブラリは不要です。</p>
+<p>ターミナルで、このREADMEがあるフォルダへ移動して実行します。</p>
+<pre><code>python3 weather-bot/weather_bot.py --demo</code></pre>
+<p>2026-01-01の架空データが表示されます。現在の予報ではなく、LINEにも送信されません。</p>
+<h4>実際の予報を確認（送信なし）</h4>
+<pre><code>python3 weather-bot/weather_bot.py</code></pre>
+<p>初期値は東京駅付近です。例：気仙沼市中心部付近を指定する場合：</p>
+<pre><code>python3 weather-bot/weather_bot.py --city 気仙沼 --latitude 38.908 --longitude 141.570</code></pre>
+<p>インターネット接続が必要です。Open-Meteoの利用条件・制限に従ってください。</p>
+<h4>LINEに送信するための設定</h4>
+<p>1. LINE公式アカウントを作成し、LINE Official Account ManagerでMessaging APIを有効にします。</p>
+<p>2. LINE Developersコンソールで、そのチャネルのMessaging APIタブからチャネルアクセストークンを発行します。</p>
+<p>3. 自分のLINEで公式アカウントを友だち追加します。</p>
+<p>4. チャネル基本設定の「あなたのユーザーID」を確認します。表示名や友だち検索用のLINE IDとは異なる、Uから始まる33文字です。表示されない場合はビジネスIDとLINEアカウントの連携を確認してください。</p>
+<p>5. 次の環境変数を、自分の端末のターミナルに設定します。トークンをコード・HTML・README・GitHubへ記載しないでください。</p>
+<p>macOS標準のzshでは、以下の入力方法ならトークンを画面に表示せず、コマンド履歴にも値を直接書かずに設定できます。</p>
+<pre><code>read -s &#x27;LINE_CHANNEL_ACCESS_TOKEN?チャネルアクセストークン: &#x27;
+echo
+export LINE_CHANNEL_ACCESS_TOKEN
+read &#x27;LINE_USER_ID?あなたのユーザーID: &#x27;
+export LINE_USER_ID</code></pre>
+<p>同じターミナルで、送信先が自分であることを確認して実行：</p>
+<pre><code>python3 weather-bot/weather_bot.py --city 気仙沼 --latitude 38.908 --longitude 141.570 --send</code></pre>
+<p>このコマンドはLINEへ実際に送信します。送信回数は公式アカウントのプランや上限の影響を受けます。</p>
+<p>HTTP成功は受信の保証ではありません。自分のLINEで受信を確認してください。</p>
+<p>タイムアウト時は送信済みの可能性もあるため、受信状況を見てから再実行してください。重複防止のため自動再送は実装していません。</p>
+<p>このプログラムは<code>.env</code>を自動読込しません。通常実行と<code>--demo</code>ではトークンは不要です。</p>
+<h4>検証</h4>
+<pre><code>python3 -m unittest discover -s weather-bot -v</code></pre>
+<p>日本語整形・欠測・不正データ・緯度検証・デモ時の通信禁止・認証未設定時の送信禁止・送信JSON・HTTPエラー表示をテストしています。</p>
+<p>実API接続、LINEでの実機受信、定期実行は未検証です。定期実行の仕組みは含めていません。</p>
+<h4>GitHubへ載せるファイル</h4>
+<p>このフォルダの構成を保ってリポジトリへ追加します。秘密情報を入れたファイルはアップロードしないでください。</p>
+<p><code>index.html</code>にはコードと手順を内蔵しています。Pythonを実行する場合やテストする場合は、<code>weather-bot</code>フォルダも使用してください。</p>
+<p>HTMLは紹介ページです。GitHub PagesなどでHTMLを公開してもPythonは実行されません。BotはPythonのある端末やサーバーで実行します。</p>
+<h4>設計を説明するポイント</h4>
+<p>- <code>fetch_weather</code>：HTTP GETで予報を取得</p>
+<p>- <code>format_message</code>：JSONを検証し、人が読めるメッセージに変換</p>
+<p>- <code>send_line</code>：認証ヘッダー付きのHTTP POSTで送信</p>
+<p>- <code>main</code>：引数でデモ・確認・送信を切り替え</p>
+<h4>公式ドキュメント・出典</h4>
+<p>- <a href="https://open-meteo.com/en/docs">Open-Meteo Forecast API</a></p>
+<p>- <a href="https://open-meteo.com/en/terms">Open-Meteo利用条件</a></p>
+<p>- <a href="https://developers.line.biz/ja/docs/messaging-api/getting-started/">LINE Messaging APIの開始</a></p>
+<p>- <a href="https://developers.line.biz/ja/docs/messaging-api/getting-user-ids/">LINEユーザーIDの取得</a></p>
+<p>- <a href="https://developers.line.biz/ja/reference/messaging-api/">LINE Messaging APIリファレンス</a></p>
+<p>天気データの出典はOpen-Meteoです。通知文にも出典リンクを含めています。</p>
+        </section>
+      </div>
+
+    </section>
+    <section class="content" aria-labelledby="contact-title">
+      <div class="section-heading"><span class="number">05</span><h2 id="contact-title">お仕事について</h2></div>
+      <p>フルリモートでのIT関連業務を希望しています。詳しい職務経歴や勤務条件は、応募先とのやり取りの中でお伝えします。</p>
+      <p class="note">採用に関するご連絡は、このページをご案内した応募媒体・メールの連絡先へお願いいたします。</p>
+      <!-- 公開用連絡先が確定したら、ここにmailtoリンクやプロフィールURLを追加できます。 -->
+    </section>
+  </main>
+  <footer><div class="wrap"><span>© Hayato · Portfolio</span><a href="#top">ページの先頭へ ↑</a></div></footer>
+</body>
+</html>
